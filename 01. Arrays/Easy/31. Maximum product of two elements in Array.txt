@@ -1,0 +1,68 @@
+1464. Maximum Product of Two Elements in an Array
+Easy
+2.4K
+229
+Companies
+Given the array of integers nums, you will choose two different indices i and j of that array. Return the maximum value of (nums[i]-1)*(nums[j]-1).
+ 
+
+Example 1:
+
+Input: nums = [3,4,5,2]
+Output: 12 
+Explanation: If you choose the indices i=1 and j=2 (indexed from 0), you will get the maximum value, that is, (nums[1]-1)*(nums[2]-1) = (4-1)*(5-1) = 3*4 = 12. 
+Example 2:
+
+Input: nums = [1,5,4,5]
+Output: 16
+Explanation: Choosing the indices i=1 and j=3 (indexed from 0), you will get the maximum value of (5-1)*(5-1) = 16.
+Example 3:
+
+Input: nums = [3,7]
+Output: 12
+ 
+
+Constraints:
+
+2 <= nums.length <= 500
+1 <= nums[i] <= 10^3
+
+Solution:
+
+class Solution {
+    public int maxProduct(int[] nums) {
+
+        // perform optimized bubble sorting. Keep two maximum values at last indices
+        boolean swapped=false; // check if swapping happened in present iteration
+        int temp=0;
+        for(int i=0;i<2;i++) // only two iterations
+        {
+            swapped=false;
+            if(i==2)
+            {
+                break;
+            }
+            for(int j=0;j< (nums.length-i-1); j++)
+            {
+                // if any two pairs are swapped , swapped becomes true otherwise stop sorting process of i loop iteration after j loop of comparing two elements
+                if(nums[j]>nums[j+1])
+                {
+                    temp=nums[j];
+                    nums[j]=nums[j+1];
+                    nums[j+1]=temp;
+                    swapped=true;
+                }
+            }
+
+            if(swapped==false)
+            {
+                //array is sorted process can be stopped
+                break;
+            }
+        }
+
+        return (nums[nums.length-1]-1)*(nums[nums.length-2]-1);
+
+        
+    }
+}
