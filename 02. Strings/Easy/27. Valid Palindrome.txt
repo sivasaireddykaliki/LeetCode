@@ -1,0 +1,71 @@
+125. Valid Palindrome
+Solved
+Easy
+Topics
+Companies
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+
+Given a string s, return true if it is a palindrome, or false otherwise.
+
+ 
+
+Example 1:
+
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+Explanation: "amanaplanacanalpanama" is a palindrome.
+Example 2:
+
+Input: s = "race a car"
+Output: false
+Explanation: "raceacar" is not a palindrome.
+Example 3:
+
+Input: s = " "
+Output: true
+Explanation: s is an empty string "" after removing non-alphanumeric characters.
+Since an empty string reads the same forward and backward, it is a palindrome.
+ 
+
+Constraints:
+
+1 <= s.length <= 2 * 105
+s consists only of printable ASCII characters.
+
+Solution:
+
+class Solution {
+    public boolean isPalindrome(String s) {
+        
+        String lowerStr="";
+        String revStr="";
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)>='a' && s.charAt(i)<='z')
+            {
+                lowerStr+=s.charAt(i);
+            }
+            else if(s.charAt(i)>='A' && s.charAt(i)<='Z')
+            {
+                int ascii = (int)s.charAt(i)+32;
+                lowerStr+=(char)ascii;
+            }
+
+            else if(s.charAt(i)>='0' && s.charAt(i)<='9')
+            {
+                lowerStr+=s.charAt(i);
+            }
+            else
+            {
+                continue;
+            }
+        }
+
+        for(int i=lowerStr.length()-1;i>=0;i--)
+        {
+            revStr+=lowerStr.charAt(i);
+        }
+
+        return lowerStr.equals(revStr);
+    }
+}
