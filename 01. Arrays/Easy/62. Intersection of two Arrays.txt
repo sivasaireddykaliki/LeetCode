@@ -1,0 +1,69 @@
+349. Intersection of Two Arrays
+Solved
+Easy
+Topics
+Companies
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique and you may return the result in any order.
+
+ 
+
+Example 1:
+
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2]
+Example 2:
+
+Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+Output: [9,4]
+Explanation: [4,9] is also accepted.
+ 
+
+Constraints:
+
+1 <= nums1.length, nums2.length <= 1000
+0 <= nums1[i], nums2[i] <= 1000
+
+Solution:
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        
+        // create empty sets and intiailize with nums1 and nums2 respectively
+        Set<Integer> a= new HashSet<Integer>();
+        Set<Integer> b = new HashSet<Integer>();
+
+        /*
+
+        To convert int[] to List<Integer>
+
+        Arrays.stream(intArray)
+                .boxed()
+                .collect(Collectors.toList())
+
+        */
+
+        List<Integer> list1 = Arrays.stream(nums1).boxed().collect(Collectors.toList());
+        List<Integer> list2 = Arrays.stream(nums2).boxed().collect(Collectors.toList());
+
+
+
+        // Initialize a and b 
+        // convert nums1 to list and then add list of elements to set 'a'
+        a.addAll(list1); 
+        b.addAll(list2);
+
+        Set<Integer> intersection = new HashSet<Integer>(a);
+
+        intersection.retainAll(b); // it means a intersection b is present in intersection variable
+
+
+
+        // convert set to arrays using streams
+
+        int[] result = intersection.stream().mapToInt(Integer::intValue).toArray();
+
+
+        return result; 
+
+    }
+}
